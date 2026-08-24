@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>OAF DOWNLOAD</title>
+
+<style>
+body{
+  margin:0;
+  font-family:"Segoe UI", sans-serif;
+  background: linear-gradient(135deg,#eef2ff,#f8fafc);
+}
+
+.title{
+  text-align:center;
+  font-size:30px;
+  font-weight:900;
+  margin-top:40px;
+
+  background: linear-gradient(90deg,#4b0082,#6d28d9,#2563eb);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.file-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:25px;
+  padding:50px;
+  max-width:1000px;
+  margin:auto;
+}
+
+.file-card{
+  background:white;
+  border-radius:18px;
+  padding:25px;
+  text-align:center;
+  cursor:pointer;
+
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  transition:0.25s;
+}
+
+.file-card:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 15px 35px rgba(75,0,130,0.2);
+}
+
+.icon{
+  font-size:50px;
+}
+
+.name{
+  margin-top:10px;
+  font-weight:700;
+  color:#4b0082;
+}
+
+.back{
+  text-align:center;
+  margin:20px;
+}
+
+.back button{
+  background: linear-gradient(135deg,#4b0082,#6d28d9);
+  color:white;
+  border:none;
+  padding:12px 20px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+/* ================= LOADER ================= */
+#loader{
+  position:fixed;
+  inset:0;
+  z-index:999999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+
+  background: linear-gradient(135deg,#eef2ff,#f8fafc);
+
+  opacity:0;
+  visibility:hidden;
+  transition:0.3s ease;
+}
+
+#loader.show{
+  opacity:1;
+  visibility:visible;
+}
+
+.loader-spinner{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  border:4px solid rgba(75,0,130,0.15);
+  border-top:4px solid #6d28d9;
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  to{ transform:rotate(360deg); }
+}
+
+.loader-text{
+  margin-top:15px;
+  font-weight:800;
+  color:#4b0082;
+  letter-spacing:2px;
+}
+
+<script>
+function goBack(){
+
+  const loader = document.getElementById("loader");
+
+  loader.classList.add("show");
+
+  setTimeout(()=>{
+    window.location.href = "LC-C1.html";
+  }, 600);
+
+}
+</script>
+</style>
+
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader" class="hide">
+  <div class="loader-box">
+    <div class="loader-spinner"></div>
+    <div class="loader-text">LOADING...</div>
+  </div>
+</div>
+
+<div class="title">📁 OAF DOWNLOAD CENTER</div>
+
+<div class="file-grid">
+
+  <a href="ไฟท์ทำ SKED THAI/EMAIL_BAFS_050425.xlsx" download>
+    <div class="file-card">
+      <div class="icon">📄</div>
+      <div class="name">EMAIL BAFS</div>
+    </div>
+  </a>
+
+  <a href="ไฟท์ทำ SKED THAI/MANUAL_UFISH.docx" download>
+    <div class="file-card">
+      <div class="icon">📘</div>
+      <div class="name">MANUAL U-FISH</div>
+    </div>
+  </a>
+
+  <a href="ไฟท์ทำ SKED THAI/oaf_sked_thai.xlsx" download>
+    <div class="file-card">
+      <div class="icon">📊</div>
+      <div class="name">SKED TABLE</div>
+    </div>
+  </a>
+
+  <a href="ไฟท์ทำ SKED THAI/FORMULA_THAI2.xlsx" download>
+    <div class="file-card">
+      <div class="icon">🧮</div>
+      <div class="name">FORMULA THAI-2</div>
+    </div>
+  </a>
+
+  <a href="ไฟท์ทำ SKED THAI/FORMULA_WE_TG_MORNING.xlsx" download>
+    <div class="file-card">
+      <div class="icon">⚙️</div>
+      <div class="name">FORMULA WE+TG</div>
+    </div>
+  </a>
+
+</div>
+
+<div class="back">
+  <button onclick="goBack()">⬅ BACK TO HOME</button>
+</div>
+
+<script>
+function goBack(){ window.location.href = "LC-C1.html"; }
+
+</script>
+
+</body>
+</html>

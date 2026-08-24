@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>SPIDER OPS PANEL</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background: radial-gradient(circle at top,#eef2ff,#0b1220);
+  color:#e2e8f0;
+}
+
+/* ===== HEADER ===== */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 28px;
+  background:linear-gradient(180deg, rgba(10,14,30,0.95), rgba(15,23,42,0.7));
+  border-bottom:1px solid rgba(99,102,241,0.25);
+  box-shadow:0 0 25px rgba(99,102,241,0.15);
+  backdrop-filter:blur(14px);
+}
+
+/* LEFT SIDE */
+.left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+/* LOGO FRAME (cockpit badge) */
+.logo-wrap{
+  width:52px;
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  background:rgba(99,102,241,0.08);
+  border:1px solid rgba(99,102,241,0.3);
+  box-shadow:inset 0 0 10px rgba(99,102,241,0.15);
+}
+
+/* LOGO */
+.logo{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+  filter:drop-shadow(0 0 6px rgba(167,139,250,0.5));
+}
+
+/* TEXT BLOCK */
+.title-wrap{
+  display:flex;
+  flex-direction:column;
+  line-height:1.2;
+}
+
+/* MAIN TITLE */
+.title{
+  font-size:18px;
+  font-weight:700;
+  color:#a78bfa;
+  letter-spacing:1px;
+}
+
+/* SUB TITLE */
+.subtitle{
+  font-size:11px;
+  color:#64748b;
+  letter-spacing:2px;
+}
+
+/* LOGOUT BUTTON (cockpit style) */
+.logout{
+  padding:8px 14px;
+  border-radius:10px;
+  border:1px solid rgba(239,68,68,0.4);
+  background:rgba(239,68,68,0.15);
+  color:#fca5a5;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.logout:hover{
+  background:rgba(239,68,68,0.3);
+  transform:translateY(-2px);
+  box-shadow:0 0 15px rgba(239,68,68,0.25);
+}
+
+/* ===== LAYOUT ===== */
+.container{
+  display:grid;
+  grid-template-columns:340px 1fr;
+  height:calc(100vh - 70px);
+}
+
+/* ===== LEFT PANEL ===== */
+.panel{
+  padding:25px;
+}
+
+.card{
+  background:rgba(15,23,42,0.7);
+  backdrop-filter:blur(15px);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 0 30px rgba(99,102,241,0.15);
+  border:1px solid rgba(99,102,241,0.2);
+}
+
+label{
+  font-size:12px;
+  color:#a5b4fc;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  margin-bottom:12px;
+  border-radius:10px;
+  border:1px solid rgba(99,102,241,0.3);
+  background:rgba(2,6,23,0.6);
+  color:#e2e8f0;
+  outline:none;
+}
+
+textarea{
+  min-height:80px;
+  resize:none;
+}
+
+.submit{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(135deg,#6366f1,#8b5cf6);
+  color:white;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.submit:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 20px rgba(99,102,241,0.3);
+}
+
+/* ===== RIGHT LIST ===== */
+.list{
+  padding:25px;
+  overflow:auto;
+}
+
+.list > div{
+  background:rgba(15,23,42,0.6);
+  border:1px solid rgba(99,102,241,0.2);
+  padding:15px;
+  margin-bottom:15px;
+  border-radius:16px;
+  transition:0.2s;
+}
+
+.list > div:hover{
+  transform:scale(1.01);
+  box-shadow:0 0 20px rgba(99,102,241,0.2);
+}
+
+h3{
+  color:#a78bfa;
+  margin:0 0 10px 0;
+}
+
+p{
+  color:#94a3b8;
+  margin:5px 0;
+}
+
+/* ===== LOADING ===== */
+#loadingScreen{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,#020617,#0b1220);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  color:#a5b4fc;
+  font-size:14px;
+  letter-spacing:2px;
+}
+
+.print-btn{
+  padding:8px 14px;
+  border-radius:10px;
+  border:1px solid rgba(34,197,94,0.4);
+  background:rgba(34,197,94,0.15);
+  color:#86efac;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.print-btn:hover{
+  background:rgba(34,197,94,0.3);
+  transform:translateY(-2px);
+  box-shadow:0 0 15px rgba(34,197,94,0.25);
+}
+</style>
+</head>
+
+<body>
+
+<div id="loadingScreen">
+  <div>LOADING...</div>
+</div>
+
+<div class="header">
+
+  <div class="left">
+
+    <div class="logo-wrap">
+      <img src="thaiairways2.png" class="logo">
+    </div>
+
+    <div class="title-wrap">
+      <div class="title">SPIDER REPORT SYSTEM</div>
+      <div class="subtitle">AIRLINE OPERATIONS CONTROL PANEL</div>
+    </div>
+
+  </div>
+
+  <div style="display:flex; gap:10px;">
+  <button class="print-btn" onclick="printReport()">🖨️ PRINT</button>
+  <button class="logout" onclick="logout()">LOGOUT</button>
+</div>
+
+</div>
+
+<div class="container">
+
+  <div class="panel">
+    <div class="card">
+<div style="margin-bottom:15px">
+
+  <label>FILTER TYPE</label>
+  <select id="filterType">
+    <option value="all">ALL</option>
+    <option value="date">DATE</option>
+    <option value="aircraft">AIRCRAFT</option>
+  </select>
+
+  <label>FILTER VALUE</label>
+  <input id="filterValue" placeholder="เช่น 23/04/2026 หรือ A320">
+
+  <button class="submit" onclick="load()">FILTER</button>
+
+</div>
+
+      <label>USER</label>
+      <input id="user" readonly>
+
+      <label>DATE</label>
+      <input type="date" id="date">
+
+      <label>AIRCRAFT</label>
+      <select id="aircraft">
+        <option>A320</option>
+        <option>A330</option>
+        <option>A350</option>
+        <option>B737</option>
+        <option>B777</option>
+        <option>B787</option>
+	  <option>OTHER</option>
+      </select>
+
+      <label>REPORT</label>
+      <textarea id="report"></textarea>
+
+      <button class="submit" onclick="save()">SUBMIT</button>
+
+    </div>
+  </div>
+
+  <div class="list" id="list"></div>
+
+</div>
+
+<script>
+function formatDateTH(dateStr){
+
+  if(!dateStr) return "-";
+
+  // รองรับ dd/mm/yyyy
+  const parts = dateStr.split("/");
+
+  if(parts.length === 3){
+    const day = parts[0];
+    const month = parts[1];
+    const year = parts[2];
+    return `${day.padStart(2,'0')}/${month.padStart(2,'0')}/${year}`;
+  }
+
+  // fallback (กรณีเป็น ISO จากระบบ)
+  const d = new Date(dateStr);
+
+  if(isNaN(d.getTime())){
+    return dateStr;
+  }
+
+  const day = String(d.getDate()).padStart(2,'0');
+  const month = String(d.getMonth()+1).padStart(2,'0');
+  const year = d.getFullYear();
+
+  return `${day}/${month}/${year}`;
+}
+
+const BASE_URL = "https://script.google.com/macros/s/AKfycbwXsHm8b_z9HKvpWtltMNV5ovHnQCD2jg2znqo9aNzBgc8lfqf1apv5-qvTLwiIkQZlCg/exec";
+
+/* AUTH */
+const auth = localStorage.getItem("auth");
+const loginTime = localStorage.getItem("loginTime");
+
+if(!auth){
+  location.href="login.html";
+}
+
+if(loginTime && Date.now() - parseInt(loginTime) > 3600000){
+  localStorage.clear();
+  location.href="login.html";
+}
+
+/* USER */
+document.getElementById("user").value = localStorage.getItem("name") || "";
+document.getElementById("date").valueAsDate = new Date();
+
+/* =========================
+   LOAD DATA (FIXED)
+========================= */
+async function load(){
+
+  const list = document.getElementById("list");
+  list.innerHTML = "Loading...";
+
+  const type = document.getElementById("filterType").value;
+  const value = document.getElementById("filterValue").value.trim();
+
+  try{
+
+    const res = await fetch(BASE_URL + "?action=getReport");
+    const data = await res.json();
+
+    if(!data || data.status !== "success"){
+      list.innerHTML = "No data";
+      return;
+    }
+
+    let rows = data.data;
+
+    // ================= FILTER =================
+    if(type === "date" && value){
+      rows = rows.filter(r => r.date.includes(value));
+    }
+
+    if(type === "aircraft" && value){
+      rows = rows.filter(r => r.aircraft === value);
+    }
+
+    // ================= GROUP =================
+    let grouped = {};
+
+    rows.forEach(r => {
+
+      if(!grouped[r.aircraft]) grouped[r.aircraft] = {};
+      if(!grouped[r.aircraft][r.date]) grouped[r.aircraft][r.date] = [];
+
+      grouped[r.aircraft][r.date].push(r);
+    });
+
+    list.innerHTML = "";
+
+    for(let ac in grouped){
+
+      let acDiv = document.createElement("div");
+      acDiv.innerHTML = `<h3>✈️ ${ac}</h3>`;
+
+      for(let dt in grouped[ac]){
+
+        let dDiv = document.createElement("div");
+        dDiv.innerHTML = `<p>📅 ${formatDateTH(dt)}</p>`;
+
+        grouped[ac][dt].forEach(r => {
+
+          let item = document.createElement("div");
+
+          // ===== safe time format =====
+          let timeText = "-";
+
+          if (r.time) {
+            const d = new Date(r.time);
+            if (!isNaN(d.getTime())) {
+              timeText = d.toLocaleTimeString("th-TH", {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+              });
+            } else {
+              timeText = r.time;
+            }
+          }
+
+          item.innerHTML = `
+            <b>${r.user}</b> (${timeText})<br>
+            ${r.report}
+            <hr>
+          `;
+
+          dDiv.appendChild(item);
+        });
+
+        acDiv.appendChild(dDiv);
+      }
+
+      list.appendChild(acDiv);
+    }
+
+  }catch(err){
+    console.log(err);
+    list.innerHTML = "ERROR LOAD DATA";
+  }
+}
+
+/* =========================
+   SAVE (FIXED)
+========================= */
+async function save(){
+
+  const payload = {
+    action: "saveReport",
+    user: localStorage.getItem("name"),
+    aircraft: document.getElementById("aircraft").value,
+    report: document.getElementById("report").value,
+    date: document.getElementById("date").value
+  };
+
+  try{
+
+    const res = await fetch(BASE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+
+    if(data.status === "success"){
+      document.getElementById("report").value = "";
+      load();
+    }
+
+  }catch(err){
+    console.log(err);
+    alert("ส่งข้อมูลไม่สำเร็จ");
+  }
+}
+
+/* LOGOUT */
+function logout(){
+  localStorage.clear();
+  location.href="LC-C1.html";
+}
+
+/* START */
+window.addEventListener("load", ()=>{
+  setTimeout(()=>{
+    document.getElementById("loadingScreen")?.remove();
+    load();
+  }, 800);
+});
+
+function printReport(){
+
+  const content = document.getElementById("list").innerHTML;
+
+  const win = window.open('', '', 'width=900,height=700');
+
+  win.document.write(`
+    <html>
+    <head>
+      <title>SPIDER REPORT</title>
+      <style>
+        body{
+          font-family: Arial, sans-serif;
+          padding:20px;
+          color:#000;
+          background:#fff;
+        }
+
+        h1{
+          text-align:center;
+          margin-bottom:5px;
+        }
+
+        .sub{
+          text-align:center;
+          font-size:12px;
+          margin-bottom:20px;
+          color:#555;
+        }
+
+        h3{
+          margin-top:20px;
+          border-bottom:1px solid #ccc;
+          padding-bottom:5px;
+        }
+
+        p{
+          margin:4px 0;
+        }
+
+        hr{
+          border:none;
+          border-top:1px dashed #ccc;
+          margin:8px 0;
+        }
+      </style>
+    </head>
+
+    <body>
+
+      <h1>SPIDER REPORT SYSTEM</h1>
+      <div class="sub">AIRLINE OPERATIONS REPORT</div>
+
+      <div>
+        ${content}
+      </div>
+
+    </body>
+    </html>
+  `);
+
+  win.document.close();
+
+  setTimeout(()=>{
+    win.print();
+    win.close();
+  },500);
+}
+
+function printReport(){
+
+  const user = localStorage.getItem("name") || "-";
+  const now = new Date();
+
+  let data = [];
+
+  document.querySelectorAll("#list > div").forEach(acBlock => {
+
+    const aircraft = acBlock.querySelector("h3")?.innerText.replace("✈️","").trim();
+
+    acBlock.querySelectorAll("div").forEach(dateBlock => {
+
+      const dateText = dateBlock.querySelector("p")?.innerText.replace("📅","").trim();
+
+      dateBlock.querySelectorAll("div").forEach(item => {
+
+        const raw = item.innerText.split("\n");
+
+        if(raw.length >= 2){
+          data.push({
+            aircraft,
+            date: dateText,
+            line1: raw[0],
+            report: raw[1]
+          });
+        }
+
+      });
+
+    });
+
+  });
+
+  // ===== GROUP =====
+  let grouped = {};
+
+  data.forEach(r => {
+    const parts = r.date.split("/");
+    if(parts.length !== 3) return;
+
+    const monthKey = `${parts[1]}/${parts[2]}`;
+
+    if(!grouped[monthKey]) grouped[monthKey] = {};
+    if(!grouped[monthKey][r.aircraft]) grouped[monthKey][r.aircraft] = [];
+
+    grouped[monthKey][r.aircraft].push(r);
+  });
+
+  const totalReports = data.length;
+
+  const win = window.open('', '', 'width=1100,height=800');
+
+  let html = `
+  <html>
+  <head>
+    <title>SPIDER REPORT</title>
+    <style>
+      @page { size: A4; margin: 15mm; }
+
+      body{
+        font-family: "Segoe UI", Arial;
+        font-size:12px;
+        color:#000;
+      }
+
+      .header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        border-bottom:3px solid #000;
+        padding-bottom:10px;
+        margin-bottom:15px;
+      }
+
+      .logo{
+        height:55px;
+      }
+
+      .title{
+        text-align:right;
+      }
+
+      .title h1{
+        margin:0;
+        font-size:20px;
+      }
+
+      .title .sub{
+        font-size:12px;
+      }
+
+      .summary{
+        display:flex;
+        gap:20px;
+        margin-bottom:15px;
+      }
+
+      .box{
+        flex:1;
+        border:1px solid #000;
+        padding:8px;
+      }
+
+      .box b{
+        display:block;
+        font-size:11px;
+      }
+
+      .month{
+        margin-top:20px;
+        font-size:14px;
+        font-weight:bold;
+        border-bottom:2px solid #000;
+        padding-bottom:3px;
+      }
+
+      .aircraft{
+        margin-top:10px;
+        font-weight:bold;
+      }
+
+      table{
+        width:100%;
+        border-collapse:collapse;
+        margin-top:5px;
+      }
+
+      th, td{
+        border:1px solid #000;
+        padding:6px;
+        vertical-align:top;
+      }
+
+      th{
+        background:#eee;
+        font-size:11px;
+      }
+
+      td{
+        font-size:11px;
+      }
+
+      .footer{
+        margin-top:20px;
+        font-size:10px;
+        display:flex;
+        justify-content:space-between;
+      }
+
+      .watermark{
+        position:fixed;
+        top:45%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        font-size:70px;
+        color:rgba(0,0,0,0.04);
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+    <div class="watermark">SPIDER REPORT</div>
+
+    <!-- HEADER -->
+    <div class="header">
+      <img src="thaiairways.png" class="logo">
+      <div class="title">
+        <h1>SPIDER REPORT</h1>
+        
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="summary">
+      <div class="box"><b>TOTAL REPORTS</b>${totalReports}</div>
+      <div class="box"><b>GENERATED BY</b>${user}</div>
+      <div class="box"><b>PRINT TIME</b>${now.toLocaleString("th-TH")}</div>
+    </div>
+  `;
+
+  for(let month in grouped){
+
+    html += `<div class="month">MONTH: ${month}</div>`;
+
+    for(let ac in grouped[month]){
+
+      html += `<div class="aircraft">AIRCRAFT: ${ac}</div>`;
+
+      html += `
+      <table>
+        <tr>
+          <th style="width:90px;">DATE</th>
+          <th style="width:140px;">USER / TIME</th>
+          <th>DETAIL</th>
+        </tr>
+      `;
+
+      grouped[month][ac].forEach(r => {
+
+        html += `
+        <tr>
+          <td>${r.date}</td>
+          <td>${r.line1}</td>
+          <td>${r.report}</td>
+        </tr>
+        `;
+
+      });
+
+      html += `</table>`;
+    }
+  }
+
+  html += `
+    <div class="footer">
+      <div>SPIDER OPS SYSTEM</div>
+      <div>CONFIDENTIAL</div>
+    </div>
+
+  </body>
+  </html>
+  `;
+
+  win.document.write(html);
+  win.document.close();
+
+  setTimeout(()=>{
+    win.print();
+    win.close();
+  },500);
+}
+
+</script>
+
+</body>
+</html>

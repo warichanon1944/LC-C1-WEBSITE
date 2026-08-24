@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>OAF CUSTOMER SYSTEM</title>
+
+<style>
+
+/* ================= BASE ================= */
+body{
+  margin:0;
+  font-family:"Segoe UI", sans-serif;
+  background: radial-gradient(circle at top,#eef2ff,#f8fafc);
+  overflow-x:hidden;
+}
+
+/* animated glow background */
+body::before{
+  content:"";
+  position:fixed;
+  width:600px;
+  height:600px;
+  background: radial-gradient(circle,#6d28d9,transparent 70%);
+  top:-200px;
+  left:-200px;
+  filter: blur(80px);
+  opacity:0.3;
+  z-index:-1;
+}
+
+/* ================= TITLE ================= */
+.title{
+  text-align:center;
+  font-size:34px;
+  font-weight:900;
+  margin-top:50px;
+
+  background: linear-gradient(90deg,#4b0082,#6d28d9,#2563eb);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  letter-spacing:2px;
+}
+
+/* subtitle */
+.subtitle{
+  text-align:center;
+  color:#6b7280;
+  margin-top:8px;
+  font-size:14px;
+}
+
+/* ================= GRID ================= */
+.folder{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:25px;
+  padding:50px;
+  max-width:1000px;
+  margin:auto;
+}
+
+/* ================= CARD ================= */
+.file-card{
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+
+  border-radius:18px;
+  padding:25px;
+  text-align:center;
+  cursor:pointer;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  transition:0.3s ease;
+
+  position:relative;
+  overflow:hidden;
+}
+
+/* glow border animation */
+.file-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  padding:2px;
+  background: linear-gradient(135deg,#4b0082,#6d28d9,#2563eb);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity:0;
+  transition:0.3s;
+}
+
+.file-card:hover::before{
+  opacity:1;
+}
+
+.file-card:hover{
+  transform:translateY(-10px) scale(1.03);
+  box-shadow:0 20px 45px rgba(75,0,130,0.25);
+}
+
+/* icon */
+.icon{
+  font-size:48px;
+}
+
+/* name */
+.name{
+  margin-top:12px;
+  font-weight:800;
+  color:#4b0082;
+  letter-spacing:0.5px;
+}
+
+/* ================= BACK ================= */
+.back{
+  text-align:center;
+  margin:30px;
+}
+
+.back button{
+  background: linear-gradient(135deg,#4b0082,#6d28d9);
+  color:white;
+  border:none;
+  padding:12px 25px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:700;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  transition:0.3s;
+}
+
+.back button:hover{
+  transform:scale(1.05);
+}
+
+/* small label */
+.tag{
+  font-size:11px;
+  color:#9ca3af;
+  margin-top:5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="title">🧾 OAF CUSTOMER REFERENT</div>
+<div class="subtitle">DOCUMENT CONTROL CENTER</div>
+
+<div class="folder">
+
+  <a class="file-card" href="CUSTOMER REFERENT/customer_hx_cz_mf_ky_type.xlsx" download>
+    <div class="icon">📄</div>
+    <div class="name">CUSTOMER HX TYPE</div>
+    <div class="tag">EXCEL FILE</div>
+  </a>
+
+  <a class="file-card" href="CUSTOMER REFERENT/customer_terms_conditions.xlsx" download>
+    <div class="icon">📄</div>
+    <div class="name">CUSTOMER TERMS</div>
+    <div class="tag">POLICY</div>
+  </a>
+
+  <a class="file-card" href="CUSTOMER REFERENT/customer_yellow_form_2024.xlsx" download>
+    <div class="icon">📄</div>
+    <div class="name">YELLOW FORM 2024</div>
+    <div class="tag">FORM</div>
+  </a>
+
+  <a class="file-card" href="CUSTOMER REFERENT/cz_s25_flight_schedule_2025_04_15.xlsx" download>
+    <div class="icon">📊</div>
+    <div class="name">CZ S25 SCHEDULE</div>
+    <div class="tag">FLIGHT DATA</div>
+  </a>
+
+  <a class="file-card" href="CUSTOMER REFERENT/winter_index_2024.xlsx" download>
+    <div class="icon">📁</div>
+    <div class="name">WINTER INDEX 2024</div>
+    <div class="tag">INDEX</div>
+  </a>
+
+</div>
+
+<div class="back">
+  <button onclick="goBack()">⬅ BACK TO HOME</button>
+</div>
+
+<script>
+
+function goBack(){
+  window.location.href = "LC-C1.html";
+}
+
+</script>
+
+</body>
+</html>
