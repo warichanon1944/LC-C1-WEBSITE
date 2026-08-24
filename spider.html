@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>SPIDER SYSTEM</title>
+
+<style>
+
+/* ===== BASE ===== */
+body{
+  margin:0;
+  font-family:"Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(59,130,246,0.08), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(37,99,235,0.06), transparent 45%),
+    linear-gradient(180deg,#f9fafb,#eef2ff);
+}
+
+/* ===== HEADER ===== */
+header{
+  text-align:center;
+  padding:30px 20px;
+
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(6px);
+
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
+header h1{
+  font-size:38px;
+  font-weight:900;
+
+  background: linear-gradient(90deg,#2563eb,#3b82f6,#60a5fa);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* ===== SUB ===== */
+.sub{
+  font-size:12px;
+  color:#6b7280;
+  margin-top:5px;
+}
+
+/* ===== CONTAINER ===== */
+.container{
+  padding:40px;
+  text-align:center;
+}
+
+/* ===== GRID ===== */
+.grid{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+/* ===== FILE CARD ===== */
+.file-card{
+  width:200px;
+  height:200px;
+
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+
+  border-radius:20px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,0.1),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+
+  border:1px solid rgba(37,99,235,0.15);
+
+  transition:0.3s;
+}
+
+/* hover */
+.file-card:hover{
+  transform:translateY(-10px) scale(1.05);
+  box-shadow:0 25px 50px rgba(37,99,235,0.25);
+}
+
+/* icon */
+.file-card .icon{
+  font-size:55px;
+}
+
+/* label */
+.file-card .label{
+  margin-top:10px;
+  font-weight:800;
+  color:#2563eb;
+  font-size:13px;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-btn{
+  margin-top:40px;
+
+  display:inline-block;
+
+  padding:10px 20px;
+  border-radius:999px;
+
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+  color:white;
+
+  font-weight:700;
+  cursor:pointer;
+
+  box-shadow:0 8px 20px rgba(37,99,235,0.25);
+  transition:0.2s;
+}
+
+.back-btn:hover{
+  transform:scale(1.05);
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>SPIDER SYSTEM</h1>
+  <div class="sub">AIRCRAFT CONTROL / ROTATION SUPPORT</div>
+</header>
+
+<div class="container">
+
+  <div class="grid">
+
+    <div class="file-card" onclick="openFile('file1.pdf')">
+      <div class="icon">📄</div>
+      <div class="label">FLIGHT PLAN</div>
+    </div>
+
+    <div class="file-card" onclick="openFile('file2.xlsx')">
+      <div class="icon">📊</div>
+      <div class="label">ROTATION DATA</div>
+    </div>
+
+    <div class="file-card" onclick="openFile('file3.pdf')">
+      <div class="icon">📁</div>
+      <div class="label">DOCUMENT</div>
+    </div>
+
+    <div class="file-card" onclick="openFile('plan_towing.html')">
+      <div class="icon">📡</div>
+      <div class="label">PLAN TOWING</div>
+    </div>
+
+  </div>
+
+  <div class="back-btn" onclick="goBack()">⬅ BACK</div>
+
+</div>
+
+<script>
+
+function openFile(file){
+  window.open(file, "_blank"); // เปิดไฟล์ใหม่
+}
+
+function goBack(){
+  window.location.href = "LC-C1.html"; // กลับหน้าแรก
+}
+
+</script>
+
+</body>
+</html>
