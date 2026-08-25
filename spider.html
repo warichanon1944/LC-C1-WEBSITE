@@ -51,10 +51,10 @@ header h1{
 
 /* ===== GRID ===== */
 .grid{
-  display:flex;
+  display:grid;
+  grid-template-columns:repeat(3, 200px);
   justify-content:center;
   gap:30px;
-  flex-wrap:wrap;
 }
 
 /* ===== FILE CARD ===== */
@@ -158,6 +158,17 @@ header h1{
       <div class="icon">🚜</div>
       <div class="label">PLAN TOWING</div>
     </div>
+
+  <div class="file-card" onclick="openFile('https://thaiairways365.sharepoint.com/:x:/r/sites/LC-Spider/_layouts/15/Doc.aspx?sourcedoc=%7B8E1FC275-97C0-489C-B448-0714E781F7E5%7D&file=RECORD%20BRIDGE%2B400HZ.xlsx&action=default&mobileredirect=true')">
+    <div class="icon">⚡</div>
+    <div class="label">RECORD 400Hz</div>
+  </div>
+
+
+  <div class="file-card" onclick="openFile('https://thaiairways365.sharepoint.com/:x:/r/sites/LC-Spider/_layouts/15/Doc.aspx?sourcedoc=%7B491F3A7B-4884-48E4-9896-B8F919E6ED88%7D&file=RECORD%20RUN-HIGH%20POWER%20NOTAM.xlsx&action=default&mobileredirect=true')">
+    <div class="icon">📋</div>
+    <div class="label">RECORD RUN-HIGH</div>
+  </div>
 
   </div>
 
